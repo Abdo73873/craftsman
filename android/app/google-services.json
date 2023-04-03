@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "397979329229",
+    "project_id": "craftsman-a2784",
+    "storage_bucket": "craftsman-a2784.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:397979329229:android:916096fb9c5520d0c23f84",
+        "android_client_info": {
+          "package_name": "com.example.craftsman"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "397979329229-4e57osvae5qp7af1bdck65859cvbto30.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.craftsman",
+            "certificate_hash": "2bee91700ebd9a16eb23462c08f20462c8020aa6"
+          }
+        },
+        {
+          "client_id": "397979329229-ffafip28nauhg9kog4r146a1d0f6n3mu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQXaTEnvPSDBGgSdgFFBFUVqlPq5y5DNQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "397979329229-ffafip28nauhg9kog4r146a1d0f6n3mu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
