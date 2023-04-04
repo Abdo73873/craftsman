@@ -23,7 +23,8 @@ class RegisterState extends State<Register> {
   final TextEditingController password = TextEditingController();
   final TextEditingController confirmPass = TextEditingController();
   final TextEditingController age = TextEditingController();
-  final TextEditingController Fname = TextEditingController();
+  final TextEditingController name = TextEditingController();
+
   final TextEditingController Email = TextEditingController();
   final TextEditingController phone = TextEditingController();
   final TextEditingController address = TextEditingController();
@@ -58,7 +59,7 @@ class RegisterState extends State<Register> {
                                 const SizedBox(height: 35,),
                                 TextFormField(
                                   style: const TextStyle(color: Colors.black),
-                                  controller: Fname,
+                                  controller: name,
                                   decoration: InputDecoration(
                                       labelText: 'User Name',
                                       labelStyle: const TextStyle(fontSize: 17,color: Colors.grey,fontWeight: FontWeight.w500) ,
@@ -257,7 +258,7 @@ class RegisterState extends State<Register> {
                                 const SizedBox(height: 20,),
 
                                 TextFormField(
-                                  style: const TextStyle(color: Colors.white),
+                                  style: const TextStyle(color: Colors.black),
                                   obscureText: isObscure2,
                                   controller: confirmPass,
                                   decoration: InputDecoration(
@@ -319,7 +320,7 @@ class RegisterState extends State<Register> {
                                         },
                                       value: currentItemSelected,
                                     ),],),
-                                const SizedBox(height: 17,),
+                                const SizedBox(height: 20,),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                   crossAxisAlignment: CrossAxisAlignment.end,
@@ -339,7 +340,7 @@ class RegisterState extends State<Register> {
                                       child: const Text(
                                         "Sign Up", style: TextStyle(color:Colors.white,fontSize: 25,fontWeight: FontWeight.bold),
                                       ),),],),
-                                const SizedBox(height: 15,),
+                                const SizedBox(height: 20,),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
@@ -367,7 +368,7 @@ class RegisterState extends State<Register> {
         'email': Email.text,
         'address': address.text,
         'age': age.text,
-        'UserName':Fname.text,
+        'UserName':name.text,
         'phone':phone.text ,
         'role': role,});
       Get.offAllNamed("/successSign");
@@ -378,7 +379,7 @@ class RegisterState extends State<Register> {
       shared!.setString('email', Email.text);
       shared!.setString('address', address.text);
       shared!.setString('age', age.text);
-      shared!.setString('FirstName', Fname.text);
+      shared!.setString('UserName', name.text);
       shared!.setString('phone', phone.text);
       shared!.setString('role', role);
       shared!.setString('Career', career);

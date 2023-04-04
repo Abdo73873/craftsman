@@ -1,6 +1,4 @@
 
-
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:craftsman/profile/profile.dart';
 import 'package:craftsman/profile/viewProfile.dart';
@@ -108,7 +106,7 @@ class PaintersList extends StatelessWidget{
                 Expanded(
                   flex: 2,
                   child: ListTile(
-                    title: Text("\n${painter['FirstName']}",),
+                    title: Text("\n${painter['UserName']}",),
                     subtitle: Text("\n${painter['Career']}"),
                     textColor:Colors.black ,
                   ),

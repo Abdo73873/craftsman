@@ -30,7 +30,7 @@ class Profile  extends StatefulWidget{
     return Scaffold(
         appBar: AppBar(
           leading: IconButton(onPressed: (){
-            Get.offAllNamed("/homepage");
+           Navigator.of(context).pop();
           },icon: const Icon(Icons.arrow_back_ios_new),),
           title: const Text("Profile"),
           backgroundColor: Colors.cyan.shade800,
@@ -130,7 +130,7 @@ class Profile  extends StatefulWidget{
         .then((snapshot) async{
       if(snapshot.exists){
         setState(() {
-          name = snapshot.data()!["FirstName"];
+          name = snapshot.data()!["UserName"];
           email = snapshot.data()!["email"];
           age = snapshot.data()!["age"];
           address = snapshot.data()!["address"];
@@ -145,7 +145,7 @@ class Profile  extends StatefulWidget{
         .then((snapshot) async{
       if(snapshot.exists){
         setState(() {
-          name = snapshot.data()!["FirstName"];
+          name = snapshot.data()!["UserName"];
           email = snapshot.data()!["email"];
           age = snapshot.data()!["age"];
           address = snapshot.data()!["address"];
@@ -161,7 +161,7 @@ class Profile  extends StatefulWidget{
         .then((snapshot) async{
       if(snapshot.exists){
         setState(() {
-          name = snapshot.data()!["FirstName"];
+          name = snapshot.data()!["UserName"];
           email = snapshot.data()!["email"];
           age = snapshot.data()!["age"];
           address = snapshot.data()!["address"];
@@ -177,7 +177,7 @@ class Profile  extends StatefulWidget{
         .then((snapshot) async{
       if(snapshot.exists){
         setState(() {
-          name = snapshot.data()!["FirstName"];
+          name = snapshot.data()!["UserName"];
           email = snapshot.data()!["email"];
           age = snapshot.data()!["age"];
           address = snapshot.data()!["address"];
@@ -193,7 +193,7 @@ class Profile  extends StatefulWidget{
         .then((snapshot) async{
       if(snapshot.exists){
         setState(() {
-          name = snapshot.data()!["FirstName"];
+          name = snapshot.data()!["UserName"];
           email = snapshot.data()!["email"];
           age = snapshot.data()!["age"];
           address = snapshot.data()!["address"];
@@ -209,7 +209,7 @@ class Profile  extends StatefulWidget{
         .then((snapshot) async{
       if(snapshot.exists){
         setState(() {
-          name = snapshot.data()!["FirstName"];
+          name = snapshot.data()!["UserName"];
           email = snapshot.data()!["email"];
           age = snapshot.data()!["age"];
           address = snapshot.data()!["address"];

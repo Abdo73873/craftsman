@@ -21,7 +21,7 @@ import '../requests/painterRequest.dart';
 import 'middleware.dart';
 import '../home/more.dart';
 List<GetPage<dynamic>> ? routes = [
-  GetPage(name: "/", page: () =>  AcceptedRequests() , middlewares: [
+  GetPage(name: "/", page: () =>  Login() , middlewares: [
     middleware(),
   ] ),
   GetPage(name: "/login", page: () => const Login() ),

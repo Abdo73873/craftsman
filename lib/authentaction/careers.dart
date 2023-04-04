@@ -69,7 +69,7 @@ class CareerState extends State<Career>{
                 value: currentItemSelected,
               ),],),
 
-          const SizedBox(height: 470,),
+          const SizedBox(height: 440,),
 
           MaterialButton(
             shape: const RoundedRectangleBorder(
