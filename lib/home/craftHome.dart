@@ -5,14 +5,14 @@ import 'package:get/get_core/src/get_main.dart';
 import '../standared/exitApp.dart';
 
 
-class HomePage2  extends StatefulWidget{
-  const HomePage2 ({Key? key}) : super(key: key);
+class CraftHome  extends StatefulWidget{
+  const CraftHome ({Key? key}) : super(key: key);
   @override
   HomeState  createState () => HomeState();
 
 }
 
-class HomeState extends State<HomePage2> {
+class HomeState extends State<CraftHome> {
 
   @override
   Widget build(BuildContext context) {

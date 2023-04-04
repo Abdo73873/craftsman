@@ -13,8 +13,7 @@ class Profile  extends StatefulWidget{
   State<Profile> createState ()=> ProfileState();
 }
   class ProfileState extends State<Profile>{
-  String? fname ='';
-  String? lname ='';
+  String? name ='';
   String? email ='';
   String? age ='';
   String? address ='';
@@ -34,7 +33,7 @@ class Profile  extends StatefulWidget{
             Get.offAllNamed("/homepage");
           },icon: const Icon(Icons.arrow_back_ios_new),),
           title: const Text("Profile"),
-          backgroundColor: Colors.redAccent.shade400,
+          backgroundColor: Colors.cyan.shade800,
         ),
         body: Stack (
           children: [
@@ -64,25 +63,17 @@ class Profile  extends StatefulWidget{
                           onTap: (){
                             Get.off("");
                           },
-                          leading: const Icon(Icons.person,color: Colors.red,size: 20),
-                          title:  Text ("First name : " + "$fname",style: const TextStyle(fontSize: 19)),
+                          leading:  Icon(Icons.person,color: Colors.cyan.shade500,size: 20),
+                          title:  Text ("User Name : " + "$name",style: const TextStyle(fontSize: 19)),
 
                         ),
+
                         const SizedBox(height: 35),
                         ListTile(
                           onTap: (){
                             Get.off("");
                           },
-                          leading: const Icon(Icons.person,color: Colors.red,size: 20),
-                          title:  Text ("Last name : " + "$lname",style: const TextStyle(fontSize: 19)),
-
-                        ),
-                        const SizedBox(height: 35),
-                        ListTile(
-                          onTap: (){
-                            Get.off("");
-                          },
-                          leading: const Icon(Icons.email,color: Colors.red,size: 20),
+                          leading:  Icon(Icons.email,color: Colors.cyan.shade500,size: 20),
                           title:  Text ("Email : " + "\n$email",style: const TextStyle(fontSize: 19)),
                           trailing: const Icon(Icons.arrow_forward_ios_outlined),
                         ),
@@ -91,7 +82,7 @@ class Profile  extends StatefulWidget{
                           onTap: (){
                             Get.off("");
                           },
-                          leading: const Icon(Icons.phone,color: Colors.red,size: 20),
+                          leading:  Icon(Icons.phone,color: Colors.cyan.shade500,size: 20),
                           title:  Text ("Phone : " + "$phone",style: const TextStyle(fontSize: 19)),
                           trailing: const Icon(Icons.arrow_forward_ios_outlined),
                         ),
@@ -100,7 +91,7 @@ class Profile  extends StatefulWidget{
                           onTap: (){
                             Get.off("");
                           },
-                          leading: const Icon(Icons.text_snippet_sharp,color: Colors.red,size: 20),
+                          leading:  Icon(Icons.text_snippet_sharp,color: Colors.cyan.shade500,size: 20),
                           title:  Text ("Age: " + "$age",style: const TextStyle(fontSize: 19)),
                           trailing: const Icon(Icons.arrow_forward_ios_outlined),
                         ),
@@ -109,7 +100,7 @@ class Profile  extends StatefulWidget{
                           onTap: (){
                             Get.off("");
                           },
-                          leading: const Icon(Icons.home_rounded,color: Colors.red,size: 20),
+                          leading:  Icon(Icons.home_rounded,color: Colors.cyan.shade500,size: 20),
                           title:  Text ("Address: " + "$address",style: const TextStyle(fontSize: 19)),
                           trailing: const Icon(Icons.arrow_forward_ios_outlined),
                         ),
@@ -118,7 +109,7 @@ class Profile  extends StatefulWidget{
                           onTap: () {
                             Get.off("");
                           },
-                          leading: const Icon(Icons.person, color: Colors.red, size: 20),
+                          leading:  Icon(Icons.person, color: Colors.cyan.shade500, size: 20),
                           title: Text("Career : " + "$career", style: const TextStyle(fontSize: 19)),
                           trailing: const Icon(Icons.arrow_forward_ios_outlined),
                         ),
@@ -139,8 +130,7 @@ class Profile  extends StatefulWidget{
         .then((snapshot) async{
       if(snapshot.exists){
         setState(() {
-          fname = snapshot.data()!["FirstName"];
-          lname = snapshot.data()!["LastName"];
+          name = snapshot.data()!["FirstName"];
           email = snapshot.data()!["email"];
           age = snapshot.data()!["age"];
           address = snapshot.data()!["address"];
@@ -155,8 +145,7 @@ class Profile  extends StatefulWidget{
         .then((snapshot) async{
       if(snapshot.exists){
         setState(() {
-          fname = snapshot.data()!["FirstName"];
-          lname = snapshot.data()!["LastName"];
+          name = snapshot.data()!["FirstName"];
           email = snapshot.data()!["email"];
           age = snapshot.data()!["age"];
           address = snapshot.data()!["address"];
@@ -172,8 +161,7 @@ class Profile  extends StatefulWidget{
         .then((snapshot) async{
       if(snapshot.exists){
         setState(() {
-          fname = snapshot.data()!["FirstName"];
-          lname = snapshot.data()!["LastName"];
+          name = snapshot.data()!["FirstName"];
           email = snapshot.data()!["email"];
           age = snapshot.data()!["age"];
           address = snapshot.data()!["address"];
@@ -189,8 +177,7 @@ class Profile  extends StatefulWidget{
         .then((snapshot) async{
       if(snapshot.exists){
         setState(() {
-          fname = snapshot.data()!["FirstName"];
-          lname = snapshot.data()!["LastName"];
+          name = snapshot.data()!["FirstName"];
           email = snapshot.data()!["email"];
           age = snapshot.data()!["age"];
           address = snapshot.data()!["address"];
@@ -206,8 +193,7 @@ class Profile  extends StatefulWidget{
         .then((snapshot) async{
       if(snapshot.exists){
         setState(() {
-          fname = snapshot.data()!["FirstName"];
-          lname = snapshot.data()!["LastName"];
+          name = snapshot.data()!["FirstName"];
           email = snapshot.data()!["email"];
           age = snapshot.data()!["age"];
           address = snapshot.data()!["address"];
@@ -223,8 +209,7 @@ class Profile  extends StatefulWidget{
         .then((snapshot) async{
       if(snapshot.exists){
         setState(() {
-          fname = snapshot.data()!["FirstName"];
-          lname = snapshot.data()!["LastName"];
+          name = snapshot.data()!["FirstName"];
           email = snapshot.data()!["email"];
           age = snapshot.data()!["age"];
           address = snapshot.data()!["address"];

@@ -82,7 +82,7 @@ class ElectricalList extends StatelessWidget{
             Expanded(
               flex: 2,
               child: ListTile(
-                title: Text("\n${electrical['FirstName']}",),
+                title: Text("\n${electrical['UserName']}",),
                 subtitle: Text("\n${electrical['Career']}"),
                 textColor:Colors.orange.shade900 ,
               ),

@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../standared/exitApp.dart';
 
-class HomePage  extends StatefulWidget{
-  const HomePage ({Key? key}) : super(key: key);
+class UserHome  extends StatefulWidget{
+  const UserHome ({Key? key}) : super(key: key);
   @override
   HomeState  createState () => HomeState();
 
 }
 
-class HomeState extends State<HomePage>{
+class HomeState extends State<UserHome>{
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class HomeState extends State<HomePage>{
         floatingActionButton: FloatingActionButton(
           backgroundColor: Colors.white,
           onPressed: (){},
-          child: Icon(Icons.notifications,size: 35,color: Colors.red.shade700,),
+          child: Icon(Icons.notifications,size: 35,color: Colors.cyan.shade700,),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterDocked,
         bottomNavigationBar: BottomAppBar(
@@ -33,7 +33,7 @@ class HomeState extends State<HomePage>{
                   child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Icon(Icons.home,size: 35,color: Colors.red.shade600),
+                        Icon(Icons.home,size: 35,color: Colors.cyan.shade700),
                         const Text("Home")
                       ]),
                 )
@@ -46,7 +46,7 @@ class HomeState extends State<HomePage>{
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Icon(Icons.account_circle_rounded,
-                          size: 35,color: Colors.red.shade600),
+                          size: 35,color: Colors.cyan.shade700),
                       const Text("Profile")
                     ],
                   ),
@@ -61,7 +61,7 @@ class HomeState extends State<HomePage>{
                 },
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
-                    children: [Icon(Icons.chat,size: 35,color: Colors.red.shade600),
+                    children: [Icon(Icons.chat,size: 35,color: Colors.cyan.shade700),
                       const Text("Chat")
                     ],
                   ),
@@ -73,7 +73,7 @@ class HomeState extends State<HomePage>{
                 },
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
-                    children: [Icon(Icons.more_horiz,color: Colors.red.shade600,size: 35,),
+                    children: [Icon(Icons.more_horiz,color: Colors.cyan.shade700,size: 35,),
                       const Text("More")
                     ],
                   ),
@@ -89,7 +89,7 @@ class HomeState extends State<HomePage>{
 
         appBar: AppBar(
           title: const Text("Home",style: TextStyle(color: Colors.white,fontSize: 30)),
-          backgroundColor: Colors.red.shade600,
+          backgroundColor: Colors.cyan.shade800,
           leading: Icon(Icons.home_rounded,size: 40,color: Colors.blueGrey.shade100),
         ),
         body: WillPopScope(
@@ -107,20 +107,21 @@ class HomeState extends State<HomePage>{
 
                       enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20),
-                          borderSide: BorderSide(color: Colors.red.shade400, width: 2,)),
+                          borderSide: BorderSide(color: Colors.cyan.shade600, width: 2,)),
 
                       focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20),
-                          borderSide: const BorderSide(color: Colors.red, width: 2,))
+                          borderSide: const BorderSide(color: Colors.cyan, width: 2,))
                   ),
                 ),
 
               ),
               SizedBox(height: 20,),
               ElevatedButton(
+                  style: ElevatedButton.styleFrom(padding: const EdgeInsets.symmetric(vertical: 5),backgroundColor: Colors.cyan.shade800,),
                   onPressed: (){
                     Get.offAllNamed("/painter");},
-                  child: Text("Ok"))
+                  child: Text("Send"))
             ],
           ),
         ));

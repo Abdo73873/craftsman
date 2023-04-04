@@ -93,8 +93,7 @@ class CareerState extends State<Career>{
     var Email= shared!.getString('email');
     var address =shared!.getString('address');
     var age = shared!.getString('age');
-    var Fname = shared!.getString('FirstName');
-    var Lname = shared!.getString('LastName');
+    var Fname = shared!.getString('UserName');
     var phone = shared!.getString('phone',);
     var id = shared!.getString('id');
 
@@ -102,38 +101,38 @@ class CareerState extends State<Career>{
 
     if (role2 == 'Carpenter' ){
       CollectionReference carpenter = FirebaseFirestore.instance.collection('Carpenters');
-      carpenter.doc(user!.uid).set({'email': Email,'address': address,'age': age, 'FirstName':Fname,'LastName':Lname,'phone':phone ,'id': id});
+      carpenter.doc(user!.uid).set({'email': Email,'address': address,'age': age, 'UserName':Fname,'phone':phone ,'id': id});
       carpenter.doc(user!.uid).update({ 'Career': role2});
       shared!.setString('Career', role2);
-      Get.offAllNamed("/carpenter");
+      Get.offAllNamed("/successSign");
     }
     else if (role2 == 'Plumper' ){
       CollectionReference plumper = FirebaseFirestore.instance.collection('Plumpers');
-      plumper.doc(user!.uid).set({'email': Email,'address': address,'age': age, 'FirstName':Fname,'LastName':Lname,'phone':phone ,'id': id});
+      plumper.doc(user!.uid).set({'email': Email,'address': address,'age': age, 'UserName':Fname,'phone':phone ,'id': id});
       plumper.doc(user!.uid).update({ 'Career': role2});
       shared!.setString('Career', role2);
-      Get.offAllNamed("/plumper");
+      Get.offAllNamed("/successSign");
     }
      else if (role2 == 'Electrical' ){
       CollectionReference electrical = FirebaseFirestore.instance.collection('Electricals');
-      electrical.doc(user!.uid).set({'email': Email,'address': address,'age': age, 'FirstName':Fname,'LastName':Lname,'phone':phone ,'id': id});
+      electrical.doc(user!.uid).set({'email': Email,'address': address,'age': age, 'UserName':Fname,'phone':phone ,'id': id});
       electrical.doc(user!.uid).update({ 'Career': role2});
       shared!.setString('Career', role2);
-      Get.offAllNamed("/electrical");
+      Get.offAllNamed("/successSign");
     }
     else if (role2 == 'Painter' ){
       CollectionReference painter = FirebaseFirestore.instance.collection('Painters');
-      painter.doc(user!.uid).set({'email': Email,'address': address,'age': age, 'FirstName':Fname,'LastName':Lname,'phone':phone ,'id': id});
+      painter.doc(user!.uid).set({'email': Email,'address': address,'age': age, 'UserName':Fname,'phone':phone ,'id': id});
       painter.doc(user!.uid).update({ 'Career': role2});
       shared!.setString('Career', role2);
-      Get.offAllNamed("/painter");
+      Get.offAllNamed("/successSign");
     }
     else if (role2 == 'Maintenance technician' ){
       CollectionReference maintaince = FirebaseFirestore.instance.collection('Technicians');
-      maintaince.doc(user!.uid).set({'email': Email,'address': address,'age': age, 'FirstName':Fname,'LastName':Lname,'phone':phone ,'id': id});
+      maintaince.doc(user!.uid).set({'email': Email,'address': address,'age': age, 'UserName':Fname,'phone':phone ,'id': id});
       maintaince.doc(user!.uid).update({ 'Career': role2});
       shared!.setString('Career', role2);
-      Get.offAllNamed("/technician");
+      Get.offAllNamed("/successSign");
   }}}
 
 

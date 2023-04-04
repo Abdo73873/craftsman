@@ -1,7 +1,7 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
-import 'package:craftsman/home/home.dart';
+import 'package:craftsman/home/Userhome.dart';
 import 'package:craftsman/main.dart';
-import 'package:craftsman/home/craft.dart';
+import 'package:craftsman/home/craftHome.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -26,7 +26,7 @@ class LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.white,
       body: WillPopScope(
         onWillPop:ExitApp,
         child :Container(
@@ -36,26 +36,26 @@ class LoginState extends State<Login> {
         child: ListView(
             padding: const EdgeInsets.only(top: 50),
             children: [
-              Image.asset(image.image1,height: 220,),
+              Image.asset(image.image8,height: 220,),
               const SizedBox(height: 27),
-              const Text(" Hello !",style: TextStyle(color: Colors.black,fontSize: 20,fontWeight: FontWeight.bold),textAlign: TextAlign.center,),
+              //const Text(" Welcome back !",style: TextStyle(color: Colors.blue,fontSize: 20,fontWeight: FontWeight.bold),textAlign: TextAlign.center,),
               const SizedBox(height: 20),
               TextFormField(
-                style: const TextStyle(color: Colors.white),
+                style: const TextStyle(color: Colors.black),
                 decoration: InputDecoration(
                     labelStyle:const TextStyle(fontSize: 17,color: Colors.grey,fontWeight: FontWeight.w500) ,
                     filled: true,
                     labelText: 'Email',
                     enabled: true,
-                    prefixIcon: Icon(Icons.email,color: Colors.red.shade500,),
+                    prefixIcon: Icon(Icons.email,color: Colors.cyan.shade800,),
 
                     enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(30),
-                        borderSide: BorderSide(color: Colors.red.shade200, width: 2,)),
+                        borderSide: BorderSide(color: Colors.cyan.shade700, width: 2,)),
 
                     focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(30),
-                        borderSide: BorderSide(color: Colors.red.shade500, width: 2,))),
+                        borderSide: BorderSide(color: Colors.cyan.shade500, width: 2,))),
 
                 validator: (value) {
                   if (value!.isEmpty) {
@@ -74,7 +74,7 @@ class LoginState extends State<Login> {
               const SizedBox(height: 20,),
 
               TextFormField(
-                style: const TextStyle(color: Colors.white),
+                style: const TextStyle(color: Colors.black),
                 obscureText: isObscure3,
                 decoration: InputDecoration(
                     labelStyle:const TextStyle(fontSize: 17,color: Colors.grey,fontWeight: FontWeight.w500) ,
@@ -82,18 +82,18 @@ class LoginState extends State<Login> {
                       setState(() {
                         isObscure3 = !isObscure3;});}),
 
-                    prefixIcon: Icon(Icons.key,color: Colors.red.shade500,),
+                    prefixIcon: Icon(Icons.key,color: Colors.cyan.shade800),
                     filled: true,
                     enabled: true,
                     labelText: 'Password',
 
                     enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(30),
-                        borderSide: BorderSide(color: Colors.red.shade200, width: 2,)),
+                        borderSide: BorderSide(color: Colors.cyan.shade700, width: 2,)),
 
                     focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(30),
-                        borderSide: BorderSide(color: Colors.red.shade500, width: 2,))),
+                        borderSide: BorderSide(color: Colors.cyan.shade500, width: 2,))),
 
                 validator: (value) {
                   RegExp regex =  RegExp(r'^.{6,}$');
@@ -116,12 +116,12 @@ class LoginState extends State<Login> {
                   child:
                   const Text("   Forget Password ? ",textAlign: TextAlign.right,style: TextStyle(fontSize: 17,color: Colors.blueGrey),)),
 
-              const SizedBox(height: 30,),
+              const SizedBox(height: 100,),
 
               Container(
                 margin: const EdgeInsets.only(left: 110,right: 110,top: 30),
                 child: ElevatedButton (
-                  style: ElevatedButton.styleFrom(padding: const EdgeInsets.symmetric(vertical: 5),backgroundColor: Colors.redAccent.shade700,),
+                  style: ElevatedButton.styleFrom(padding: const EdgeInsets.symmetric(vertical: 5),backgroundColor: Colors.cyan.shade800,),
                   onPressed: () async {
                     var user = await signIn();
                     if (user!= null) {
@@ -132,12 +132,12 @@ class LoginState extends State<Login> {
                     });},
                   child: const Text("Login" , style: TextStyle(fontSize: 27,color: Colors.white),),),),
 
-              const SizedBox(height: 110,),
+              const SizedBox(height: 20,),
 
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text("       Not a member ?  ",style: TextStyle(color: Colors.orange,fontSize: 18,),textAlign: TextAlign.center,),
+                  const Text("       Not a member ?  ",style: TextStyle(color: Colors.black,fontSize: 18,),textAlign: TextAlign.center,),
                   InkWell(
                     onTap: (){
                       Get.offAllNamed("/register");
@@ -166,7 +166,7 @@ class LoginState extends State<Login> {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) =>   const HomePage(),
+              builder: (context) =>   const UserHome(),
             ),
           );
         }
@@ -184,7 +184,7 @@ class LoginState extends State<Login> {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) =>  const HomePage2(),
+              builder: (context) =>  const CraftHome(),
             ),
           );
         }
@@ -201,7 +201,7 @@ class LoginState extends State<Login> {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) =>  const HomePage2(),
+              builder: (context) =>  const CraftHome(),
             ),
           );
         }
@@ -218,7 +218,7 @@ class LoginState extends State<Login> {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) =>  const HomePage2(),
+              builder: (context) =>  const CraftHome(),
             ),
           );
         }
@@ -235,7 +235,7 @@ class LoginState extends State<Login> {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) =>  const HomePage2(),
+              builder: (context) =>  const CraftHome(),
             ),
           );
         }
@@ -252,7 +252,7 @@ class LoginState extends State<Login> {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) =>  const HomePage2(),
+              builder: (context) =>  const CraftHome(),
             ),
           );
         }

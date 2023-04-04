@@ -1,7 +1,7 @@
 
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:craftsman/home/craft.dart';
+import 'package:craftsman/home/craftHome.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -36,7 +36,7 @@ class RequestsScreen2 extends StatelessWidget {
                       'status': 'responded',
                     }).then((value) => Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => HomePage2()
+                      MaterialPageRoute(builder: (context) => CraftHome()
                     ) ));
                     // Respond to request
                   },

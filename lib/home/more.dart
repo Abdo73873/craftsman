@@ -16,7 +16,7 @@ class More extends StatelessWidget{
   Widget build(BuildContext context){
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.red,
+        backgroundColor: Colors.cyan.shade800,
       ),
       body: Stack (children: [
         SafeArea(child: Container(
@@ -32,7 +32,7 @@ class More extends StatelessWidget{
                     onTap: (){
                       Navigator.of(context).pushReplacementNamed("/homepage");
                     },
-                    leading: const Icon(Icons.home,color: Colors.redAccent,size: 40),
+                    leading:  Icon(Icons.home,color: Colors.cyan.shade500,size: 40),
                     title: const Text ("Home",style: TextStyle(fontSize: 20)),
                   ),
 
@@ -42,7 +42,7 @@ class More extends StatelessWidget{
                     onTap: (){
                       Navigator.of(context).pushReplacementNamed("/homepage");
                     },
-                    leading: const Icon(Icons.message,color: Colors.redAccent,size: 40),
+                    leading:  Icon(Icons.message,color: Colors.cyan.shade500,size: 40),
                     title: const Text ("Messages",style: TextStyle(fontSize: 20)),
                   ),
 
@@ -52,7 +52,7 @@ class More extends StatelessWidget{
                     onTap: (){
                       Navigator.of(context).pushReplacementNamed("/setting");
                     },
-                    leading: const Icon(Icons.settings,color: Colors.redAccent,size: 40),
+                    leading:  Icon(Icons.settings,color: Colors.cyan.shade500,size: 40),
                     title: const Text ("Settings",style: TextStyle(fontSize: 20)),
                   ),
 
@@ -62,7 +62,7 @@ class More extends StatelessWidget{
                     onTap: (){
                       Navigator.of(context).pushNamed("/help");
                     },
-                    leading: const Icon(Icons.help,color: Colors.redAccent,size: 40),
+                    leading:  Icon(Icons.help,color: Colors.cyan.shade500,size: 40),
                     title: const Text ("Help",style: TextStyle(fontSize: 20)),
                   ),
 
@@ -75,7 +75,7 @@ class More extends StatelessWidget{
                       Get.offAllNamed("/login");
                     },
 
-                    leading: const Icon(Icons.exit_to_app,color: Colors.redAccent,size: 40,),
+                    leading:  Icon(Icons.exit_to_app,color: Colors.cyan.shade500,size: 40,),
                     title: const Text ("Log out",style: TextStyle(fontSize: 20)),
                   ),
                 ],
