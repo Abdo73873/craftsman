@@ -1,6 +1,9 @@
-import 'dart:io';
+import 'dart:async';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:craftsman/chats/cubit/chat_cubit.dart';
+import 'package:craftsman/constant/app_color.dart';
 import 'package:craftsman/main.dart';
-import 'package:craftsman/authentaction/register.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,7 +19,7 @@ class More extends StatelessWidget{
   Widget build(BuildContext context){
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.cyan.shade800,
+        backgroundColor: AppColors.primary,
       ),
       body: Stack (children: [
         SafeArea(child: Container(
@@ -32,7 +35,7 @@ class More extends StatelessWidget{
                     onTap: (){
                       Navigator.of(context).pushReplacementNamed("/homepage");
                     },
-                    leading:  Icon(Icons.home,color: Colors.cyan.shade500,size: 40),
+                    leading:  Icon(Icons.home,color: AppColors.primary,size: 40),
                     title: const Text ("Home",style: TextStyle(fontSize: 20)),
                   ),
 
@@ -42,7 +45,7 @@ class More extends StatelessWidget{
                     onTap: (){
                       Navigator.of(context).pushReplacementNamed("/homepage");
                     },
-                    leading:  Icon(Icons.message,color: Colors.cyan.shade500,size: 40),
+                    leading:  Icon(Icons.message,color: AppColors.primary,size: 40),
                     title: const Text ("Messages",style: TextStyle(fontSize: 20)),
                   ),
 
@@ -52,7 +55,7 @@ class More extends StatelessWidget{
                     onTap: (){
                       Navigator.of(context).pushReplacementNamed("/setting");
                     },
-                    leading:  Icon(Icons.settings,color: Colors.cyan.shade500,size: 40),
+                    leading:  Icon(Icons.settings,color: AppColors.primary,size: 40),
                     title: const Text ("Settings",style: TextStyle(fontSize: 20)),
                   ),
 
@@ -62,7 +65,7 @@ class More extends StatelessWidget{
                     onTap: (){
                       Navigator.of(context).pushNamed("/help");
                     },
-                    leading:  Icon(Icons.help,color: Colors.cyan.shade500,size: 40),
+                    leading:  Icon(Icons.help,color: AppColors.primary,size: 40),
                     title: const Text ("Help",style: TextStyle(fontSize: 20)),
                   ),
 
@@ -71,11 +74,12 @@ class More extends StatelessWidget{
                   ListTile(
                     onTap: () async {
                       shared!.clear();
+
                       await FirebaseAuth.instance.signOut();
                       Get.offAllNamed("/login");
                     },
 
-                    leading:  Icon(Icons.exit_to_app,color: Colors.cyan.shade500,size: 40,),
+                    leading:  Icon(Icons.exit_to_app,color: AppColors.primary,size: 40,),
                     title: const Text ("Log out",style: TextStyle(fontSize: 20)),
                   ),
                 ],

@@ -4,14 +4,14 @@ import 'package:get/get.dart';
 import '../standared/exitApp.dart';
 import 'get_myData.dart';
 
-class UserHome  extends StatefulWidget{
-  const UserHome ({Key? key}) : super(key: key);
+class HomePage  extends StatefulWidget{
+  const HomePage ({Key? key}) : super(key: key);
   @override
   HomeState  createState () => HomeState();
 
 }
 
-class HomeState extends State<UserHome>{
+class HomeState extends State<HomePage>{
 @override
   void initState() {
   getMyData();
@@ -23,7 +23,7 @@ class HomeState extends State<UserHome>{
         floatingActionButton: FloatingActionButton(
           backgroundColor: Colors.white,
           onPressed: (){},
-          child: Icon(Icons.notifications,size: 35,color: Colors.cyan.shade700,),
+          child: Icon(Icons.notifications,size: 35,color: Colors.red.shade700,),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterDocked,
         bottomNavigationBar: BottomAppBar(
@@ -34,12 +34,12 @@ class HomeState extends State<UserHome>{
             children: [
               Row(children: [
                 MaterialButton(onPressed: (){
-                  Navigator.pushNamed(context, "/homepage");
+                  Navigator.of(context).pushNamed("/homepage");
                 },
                   child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Icon(Icons.home,size: 35,color: Colors.cyan.shade700),
+                        Icon(Icons.home,size: 35,color: Colors.red.shade600),
                         const Text("Home")
                       ]),
                 )
@@ -52,22 +52,20 @@ class HomeState extends State<UserHome>{
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Icon(Icons.account_circle_rounded,
-                          size: 35,color: Colors.cyan.shade700),
+                          size: 35,color: Colors.red.shade600),
                       const Text("Profile")
                     ],
                   ),
                 )
               ],),
-
               const Spacer(),
-
               Row(children: [
                 MaterialButton(onPressed: (){
-                Get.offNamed("/ChatsScreen");
+                  Get.offNamed("/ChatsScreen");
                 },
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
-                    children: [Icon(Icons.chat,size: 35,color: Colors.cyan.shade700),
+                    children: [Icon(Icons.chat,size: 35,color: Colors.red.shade600),
                       const Text("Chat")
                     ],
                   ),
@@ -79,7 +77,7 @@ class HomeState extends State<UserHome>{
                 },
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
-                    children: [Icon(Icons.more_horiz,color: Colors.cyan.shade700,size: 35,),
+                    children: [Icon(Icons.more_horiz,color: Colors.red.shade600,size: 35,),
                       const Text("More")
                     ],
                   ),
@@ -92,10 +90,9 @@ class HomeState extends State<UserHome>{
 
         ),
 
-
         appBar: AppBar(
           title: const Text("Home",style: TextStyle(color: Colors.white,fontSize: 30)),
-          backgroundColor: Colors.cyan.shade800,
+          backgroundColor: Colors.red.shade600,
           leading: Icon(Icons.home_rounded,size: 40,color: Colors.blueGrey.shade100),
         ),
         body: WillPopScope(
@@ -113,21 +110,20 @@ class HomeState extends State<UserHome>{
 
                       enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20),
-                          borderSide: BorderSide(color: Colors.cyan.shade600, width: 2,)),
+                          borderSide: BorderSide(color: Colors.red.shade400, width: 2,)),
 
                       focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20),
-                          borderSide: const BorderSide(color: Colors.cyan, width: 2,))
+                          borderSide: const BorderSide(color: Colors.red, width: 2,))
                   ),
                 ),
 
               ),
               SizedBox(height: 20,),
               ElevatedButton(
-                  style: ElevatedButton.styleFrom(padding: const EdgeInsets.symmetric(vertical: 5),backgroundColor: Colors.cyan.shade800,),
                   onPressed: (){
                     Get.offAllNamed("/painter");},
-                  child: Text("Send"))
+                  child: Text("Ok"))
             ],
           ),
         ));

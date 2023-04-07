@@ -3,22 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import '../standared/exitApp.dart';
-import 'get_myData.dart';
 
 
-class CraftHome  extends StatefulWidget{
-  const CraftHome ({Key? key}) : super(key: key);
+class HomePage2  extends StatefulWidget{
+  const HomePage2 ({Key? key}) : super(key: key);
   @override
   HomeState  createState () => HomeState();
 
 }
 
-class HomeState extends State<CraftHome> {
-  @override
-  void initState() {
-    getMyData();
-    super.initState();
-  }
+class HomeState extends State<HomePage2> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,7 +35,7 @@ class HomeState extends State<CraftHome> {
             children: [
               Row(children: [
                 MaterialButton(onPressed: () {
-                  Navigator.of(context).pushNamed("/homepage2");
+                  Navigator.of(context).pushNamed("/homepage");
                 },
                   child: Column(
                       mainAxisSize: MainAxisSize.min,
@@ -69,7 +64,7 @@ class HomeState extends State<CraftHome> {
 
               Row(children: [
                 MaterialButton(onPressed: () {
-                  Get.offAllNamed("/ChatsScreen");
+                  Get.offAllNamed("/UserChat");
                 },
                   child: Column(
                     mainAxisSize: MainAxisSize.min,

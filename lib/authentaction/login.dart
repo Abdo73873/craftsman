@@ -1,12 +1,16 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:craftsman/constant/app_images.dart';
+import 'package:craftsman/constant/constant.dart';
 import 'package:craftsman/home/Userhome.dart';
 import 'package:craftsman/main.dart';
 import 'package:craftsman/home/craftHome.dart';
+import 'package:craftsman/models/person.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:craftsman/standared/images.dart';
+import '../constant/app_color.dart';
 import '../standared/exitApp.dart';
 
 class Login extends StatefulWidget {
@@ -72,7 +76,6 @@ class LoginState extends State<Login> {
                 keyboardType: TextInputType.emailAddress,
               ),
               const SizedBox(height: 20,),
-
               TextFormField(
                 style: const TextStyle(color: Colors.black),
                 obscureText: isObscure3,
@@ -107,7 +110,6 @@ class LoginState extends State<Login> {
                   password = value;
                   },
                 keyboardType: TextInputType.emailAddress,),
-
               const SizedBox(height: 17,width: 50,),
               InkWell(
                   onTap: (){
@@ -115,9 +117,7 @@ class LoginState extends State<Login> {
                     },
                   child:
                   const Text("   Forget Password ? ",textAlign: TextAlign.right,style: TextStyle(fontSize: 17,color: Colors.blueGrey),)),
-
               const SizedBox(height: 100,),
-
               Container(
                 margin: const EdgeInsets.only(left: 110,right: 110,top: 30),
                 child: ElevatedButton (
@@ -131,9 +131,7 @@ class LoginState extends State<Login> {
                       visible = true;
                     });},
                   child: const Text("Login" , style: TextStyle(fontSize: 27,color: Colors.white),),),),
-
               const SizedBox(height: 20,),
-
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -153,114 +151,52 @@ class LoginState extends State<Login> {
                       child: const CircularProgressIndicator(
                         color: Colors.white,
                       )),],),])),),));}
-  void route() {
-    User? user = FirebaseAuth.instance.currentUser;
-    FirebaseFirestore.instance.collection('users')
-        .doc(user!.uid)
-        .get()
-        .then((DocumentSnapshot documentSnapshot) {
-      if (documentSnapshot.exists) {
 
-        if (documentSnapshot.get('role') == "User") {
+
+  void route() {
+    FirebaseFirestore.instance.collection('user')
+    .where('uId',isEqualTo: myId)
+        .get()
+        .then((users) {
+      if (users.size>0) {
+          myModel =Person.fromJson(users.docs[0].data());
           shared!.setString("role", "user");
+          AppColors.primary=AppColors.getPrimaryColor();
+          AppImages.profile=AppImages.getProfile();
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
               builder: (context) =>   const UserHome(),
             ),
           );
-        }
+      }
+      else {
+        print('Document does not exist on the database');
+      }
+    });
+
+    FirebaseFirestore.instance.collection('craftsman')
+        .where('uId',isEqualTo: myId)
+        .get()
+        .then((craftsman) {
+      if (craftsman.size>0) {
+          shared!.setString("role", "craftsman");
+        myModel =Person.fromJson(craftsman.docs[0].data());
+          AppColors.primary=AppColors.getPrimaryColor();
+          AppImages.profile=AppImages.getProfile();
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) =>  const CraftHome(),
+            ),
+          );
       } else {
         print('Document does not exist on the database');
       }
     });
-    FirebaseFirestore.instance.collection('Carpenters')
-        .doc(user.uid)
-        .get()
-        .then((DocumentSnapshot documentSnapshot) {
-      if (documentSnapshot.exists) {
-        if (documentSnapshot.get('Career') == "Carpenter") {
-          shared!.setString("role", "craft");
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) =>  const CraftHome(),
-            ),
-          );
-        }
-      } else {
-        print('Document does not exist on the database');
-      }
-    });FirebaseFirestore.instance.collection('Plumpers')
-        .doc(user.uid)
-        .get()
-        .then((DocumentSnapshot documentSnapshot) {
-      if (documentSnapshot.exists) {
-        if (documentSnapshot.get('Career') == "Plumper") {
-          shared!.setString("role", "craft");
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) =>  const CraftHome(),
-            ),
-          );
-        }
-      } else {
-        print('Document does not exist on the database');
-      }
-    });FirebaseFirestore.instance.collection('Electricals')
-        .doc(user.uid)
-        .get()
-        .then((DocumentSnapshot documentSnapshot) {
-      if (documentSnapshot.exists) {
-        if (documentSnapshot.get('Career') == "Electrical") {
-          shared!.setString("role", "craft");
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) =>  const CraftHome(),
-            ),
-          );
-        }
-      } else {
-        print('Document does not exist on the database');
-      }
-    });FirebaseFirestore.instance.collection('Painters')
-        .doc(user.uid)
-        .get()
-        .then((DocumentSnapshot documentSnapshot) {
-      if (documentSnapshot.exists) {
-        if (documentSnapshot.get('Career') == "Painter") {
-          shared!.setString("role", "craft");
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) =>  const CraftHome(),
-            ),
-          );
-        }
-      } else {
-        print('Document does not exist on the database');
-      }
-    });FirebaseFirestore.instance.collection('Technicians')
-        .doc(user.uid)
-        .get()
-        .then((DocumentSnapshot documentSnapshot) {
-      if (documentSnapshot.exists) {
-        if (documentSnapshot.get('Career') == "Technician") {
-          shared!.setString("role", "craft");
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) =>  const CraftHome(),
-            ),
-          );
-        }
-      } else {
-        print('Document does not exist on the database');
-      }
-    });
+
   }
+
   Future signIn() async {
     var formData = formState.currentState;
     if (formData!.validate()) {
@@ -270,6 +206,8 @@ class LoginState extends State<Login> {
           email: email,
           password: password,
         );
+        myId =userCredential.user!.uid;
+        shared!.setString('myId', myId!);
         return userCredential;
       } on FirebaseAuthException catch (e) {
         if (e.code == 'user-not-found') {
@@ -284,7 +222,6 @@ class LoginState extends State<Login> {
                     onPressed: (){
                       Get.back();
                     }, child: const Text(" Ok ",style: TextStyle(color: Colors.black),)),]);}
-
         else if (e.code == 'wrong-password') {
           AwesomeDialog(
               context: context,

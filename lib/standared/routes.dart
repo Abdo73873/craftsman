@@ -10,12 +10,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../authentaction/careers.dart';
 import '../authentaction/forgetPass.dart';
+import '../chats/chats_screen.dart';
 import '../crafts/painter.dart';
 import '../crafts/plumper.dart';
 import '../home/Userhome.dart';
 import '../authentaction/login.dart';
 import '../request/admin request.dart';
-import '../request/userchat.dart';
 import '../request/userscreen.dart';
 import '../requests/painterRequest.dart';
 import 'middleware.dart';
@@ -43,7 +43,7 @@ List<GetPage<dynamic>> ? routes = [
   GetPage(name: "/RequestScreen", page: () =>RequestScreen() ),
   GetPage(name: "/RequestsScreen2", page: () =>RequestsScreen2() ),
   GetPage(name: "/RequestsScreen3", page: () =>RequestsScreen3() ),
-  GetPage(name: "/UserChat", page: () =>UserChat() ),
+  GetPage(name: "/ChatsScreen", page: () =>ChatsScreen() ),
   GetPage(name: "/AcceptedRequests", page: () =>AcceptedRequests() ),
 
  // GetPage(name: "/help", page: () =>Help() ),

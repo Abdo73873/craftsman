@@ -13,7 +13,7 @@ class middleware extends GetMiddleware{
       return RouteSettings(name: "/homepage");
 
 
-  else if(shared!.getString("role") !=null && shared!.getString("role")=="craft" )
+  else if(shared!.getString("role") !=null && shared!.getString("role")=="craftsman" )
   return RouteSettings(name: "/homepage2");
 }
 }

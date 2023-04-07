@@ -8,6 +8,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../constant/app_color.dart';
 import '../request/userscreen.dart';
 
 
@@ -25,9 +26,9 @@ class RequestsScreen3State extends State<RequestsScreen3>{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.cyan.shade800,
+        backgroundColor: AppColors.primary,
         leading: IconButton(
-          icon :Icon(Icons.arrow_back),
+          icon :const Icon(Icons.arrow_back),
           onPressed: () { Get.offAllNamed("/homepage2"); },),
         title: const Text('Requests'),
       ),

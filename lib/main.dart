@@ -1,4 +1,6 @@
 
+import 'package:craftsman/constant/constant.dart';
+import 'package:craftsman/home/home.dart';
 import 'package:craftsman/standared/routes.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +14,8 @@ void main()async {
   WidgetsFlutterBinding.ensureInitialized();
   shared = await SharedPreferences.getInstance();
   await Firebase.initializeApp();
-  runApp(const MainPage());
+  myId=shared!.getString('myId');
+  runApp( const MainPage());
 }
 
 class MainPage  extends StatelessWidget{
