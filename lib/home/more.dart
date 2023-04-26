@@ -1,13 +1,10 @@
-import 'dart:async';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:craftsman/chats/cubit/chat_cubit.dart';
 import 'package:craftsman/constant/app_color.dart';
 import 'package:craftsman/main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
+
 
 
 class More extends StatelessWidget{
@@ -43,16 +40,6 @@ class More extends StatelessWidget{
 
                   ListTile(
                     onTap: (){
-                      Navigator.of(context).pushReplacementNamed("/homepage");
-                    },
-                    leading:  Icon(Icons.message,color: AppColors.primary,size: 40),
-                    title: const Text ("Messages",style: TextStyle(fontSize: 20)),
-                  ),
-
-                  const SizedBox(height: 25),
-
-                  ListTile(
-                    onTap: (){
                       Navigator.of(context).pushReplacementNamed("/setting");
                     },
                     leading:  Icon(Icons.settings,color: AppColors.primary,size: 40),
@@ -63,7 +50,7 @@ class More extends StatelessWidget{
 
                   ListTile(
                     onTap: (){
-                      Navigator.of(context).pushNamed("/help");
+                      Navigator.of(context).pushReplacementNamed("/Userhelp");
                     },
                     leading:  Icon(Icons.help,color: AppColors.primary,size: 40),
                     title: const Text ("Help",style: TextStyle(fontSize: 20)),

@@ -2,11 +2,9 @@
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:craftsman/constant/app_images.dart';
-import 'package:craftsman/constant/app_images.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../constant/app_color.dart';
 import '../constant/constant.dart';
 import '../models/person.dart';

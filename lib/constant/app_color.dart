@@ -9,10 +9,10 @@ class AppColors{
       if(myModel!.role=='user'){
         return Colors.cyan.shade800;
       }else{
-        return Colors.red;
+        return Colors.cyan.shade900;
       }
     }else{
-      return Colors.cyan;
+      return Colors.cyan.shade800;
     }
   }
 }

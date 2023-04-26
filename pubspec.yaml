@@ -52,6 +52,7 @@ dependencies:
   conditional_builder_null_safety: ^0.0.6
   cached_network_image: ^3.2.3
   fluttertoast: ^8.2.1
+  flutter_local_notifications: ^8.2.0
 
 
 

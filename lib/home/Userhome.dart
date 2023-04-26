@@ -1,8 +1,11 @@
-import 'package:craftsman/chats/chats_screen.dart';
+
+import 'package:craftsman/standared/images.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../standared/exitApp.dart';
 import 'get_myData.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+
 
 class UserHome  extends StatefulWidget{
   const UserHome ({Key? key}) : super(key: key);
@@ -12,8 +15,17 @@ class UserHome  extends StatefulWidget{
 }
 
 class HomeState extends State<UserHome>{
+  var fmess = FirebaseMessaging.instance;
 @override
   void initState() {
+  fmess.getToken().then((value) {
+    print("object");
+  print(value);});
+
+  FirebaseMessaging.onMessage.listen((event) {
+    print("object");
+    print("${event.notification?.body}");
+  });
   getMyData();
   super.initState();
   }
@@ -103,7 +115,7 @@ class HomeState extends State<UserHome>{
           child :Column(
             children: [
               Container(
-                padding: const EdgeInsets.only(top: 50),
+                padding: const EdgeInsets.only(top: 30),
                 child: TextFormField (
                   decoration: InputDecoration(
                       labelText: ("Type your proplem here"),
@@ -122,12 +134,48 @@ class HomeState extends State<UserHome>{
                 ),
 
               ),
-              SizedBox(height: 20,),
+              const SizedBox(height: 20,),
               ElevatedButton(
                   style: ElevatedButton.styleFrom(padding: const EdgeInsets.symmetric(vertical: 5),backgroundColor: Colors.cyan.shade800,),
                   onPressed: (){
-                    Get.offAllNamed("/painter");},
-                  child: Text("Send"))
+                    Get.offAllNamed("/plumper");},
+                  child: const Text("Send")),
+              const SizedBox(height: 20,),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    const SizedBox(width: 5,),
+                    CircleAvatar(
+                      radius: 100,
+                        child: Image.asset(image.image11,)),
+                    const SizedBox(width: 5,),
+                    CircleAvatar(
+                        radius: 100,
+                        child: Image.asset(image.image12,)),
+
+                  ],
+                ),
+              ),
+              const SizedBox(height: 15,),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    const SizedBox(width: 5,),
+                    CircleAvatar(
+                        radius: 100,
+                        child: Image.asset(image.image13,)),
+                    const SizedBox(width: 5,),
+                    CircleAvatar(
+                        radius: 100,
+                        child: Image.asset(image.image14,)),
+
+
+                  ],
+                ),
+              ),
+
             ],
           ),
         ));

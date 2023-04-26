@@ -110,14 +110,14 @@ class LoginState extends State<Login> {
                   password = value;
                   },
                 keyboardType: TextInputType.emailAddress,),
-              const SizedBox(height: 17,width: 50,),
+              const SizedBox(height: 10,width: 50,),
               InkWell(
                   onTap: (){
                     Get.offAllNamed("/forget");
                     },
                   child:
                   const Text("   Forget Password ? ",textAlign: TextAlign.right,style: TextStyle(fontSize: 17,color: Colors.blueGrey),)),
-              const SizedBox(height: 100,),
+              const SizedBox(height: 80,),
               Container(
                 margin: const EdgeInsets.only(left: 110,right: 110,top: 30),
                 child: ElevatedButton (
@@ -131,7 +131,7 @@ class LoginState extends State<Login> {
                       visible = true;
                     });},
                   child: const Text("Login" , style: TextStyle(fontSize: 27,color: Colors.white),),),),
-              const SizedBox(height: 20,),
+              const SizedBox(height: 10,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

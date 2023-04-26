@@ -1,109 +1,162 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:craftsman/constant/constant.dart';
 import 'package:craftsman/profile/viewProfile.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:craftsman/standared/images.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
 
 class Technician extends StatefulWidget {
 
-  Technician({Key? key}) : super(key: key);
+  const Technician({Key? key}) : super(key: key);
 
   @override
   TechnicianState createState() => TechnicianState();
 }
 class TechnicianState extends State<Technician>{
 
-  CollectionReference Technicians = FirebaseFirestore.instance.collection("Technicians");
+  var Technician = FirebaseFirestore.instance.collection("craftsman").
+  where("role",isEqualTo: "Carpenter");
+  String? name ='';
 
 
-  getUser(){
-    var user = FirebaseAuth.instance.currentUser;
-  }
+
   @override
   void initState(){
-    getUser();
     super.initState();
   }
 
 
   @override
   Widget build (BuildContext context)
+
   {
+
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xFF89dad0),
-        title: Text("Technicians",style: TextStyle(color: Colors.red.shade800),),
+        elevation: 0,
+        backgroundColor:Colors.cyan.shade800,
         centerTitle: true,
-        leading: IconButton(icon:Icon (Icons.arrow_back,color: Colors.red.shade800,),onPressed: (){
-
+        leading: IconButton(icon:const Icon (Icons.arrow_back),onPressed: (){
+          Get.offAllNamed("/homepage");
         }) ,
       ),
 
-      body : Container(
-          child: FutureBuilder(
-              future: Technicians.get(),
-              builder: (context,AsyncSnapshot snapshot) {
-                if (snapshot.hasData) {
-                  return ListView.builder(
-                      itemCount: snapshot.data.docs.length,
-                      itemBuilder: (context, i) {
-                        return TechniciansList(
-                            Technician : snapshot.data.docs[i],
-                            id: snapshot.data.docs[i].id);
-                      });
-                }
-                return Center(child: CircularProgressIndicator(),);
-              })
+      body : Column(
+        children: [
+          Image.asset(image.image17,),
+          Expanded(
+            child: FutureBuilder(
+                future: Technician.get(),
+                builder: (context,AsyncSnapshot snapshot) {
+                  if (snapshot.hasData) {
+                    return ListView.builder(
+                        itemCount: snapshot.data.docs.length,
+                        itemBuilder: (context, i) {
+                          return TechnicianList(
+                              Technician : snapshot.data.docs[i],
+                              id: snapshot.data.docs[i].id);
+                        });
+                  }
+                  return const Center(child: CircularProgressIndicator(),);
+                }),
+          ),
+        ],
       ),
     );
 
   }
 }
-class TechniciansList extends StatelessWidget{
+class TechnicianList extends StatelessWidget{
   final Technician;
   final id;
-  TechniciansList({super.key,
+  TechnicianList({super.key,
     this.Technician, this.id
   });
 
   GlobalKey<FormState> formstate =  GlobalKey <FormState>();
 
+  final ValueNotifier<bool> isRequested= ValueNotifier<bool> (false);
+
   @override
   Widget build (BuildContext context){
-    return InkWell(
-      onTap: (){
-        Navigator.of(context).push(MaterialPageRoute(builder: (context){
-          return view(crafts: Technician,);
-        }));
-      },
-      child: Card(
-        child: Row(
-          children: [
-            Expanded(
-              flex: 2,
-              child: ListTile(
-                title: Text("\n${Technician['UserName']}",),
-                subtitle: Text("\n${Technician['Career']}"),
-                textColor:Colors.orange.shade900 ,
-              ),
-            ),
-            Expanded(
-              flex: 2,
-              child: ListTile(
-                subtitle: Text("\n${Technician['phone']}",),
-                textColor:Colors.orange.shade900 ,
+    return Column(
+      children: [
+        InkWell(
+          onTap: () {
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+              return view(crafts: Technician,);
+            }));
+          },
+          child: Card(
+            child: Row(
+              children: [
 
-              ),
+                Expanded(
+                  flex: 3,
+                  child: ListTile(
+                    title: Text("\n${Technician['name']}",),
+                    subtitle: Text("\n${Technician['role']}"),
+                    textColor: Colors.black,
+                  ),
+                ),
+                Expanded(
+                  flex: 3,
+                  child: ListTile(
+                    subtitle: Text("\n${Technician['phone']}",),
+                    textColor: Colors.black,
+
+                  ),
+                ),
+
+                Expanded(
+                    flex: 4,
+                    child: ListTile(
+
+                      trailing:
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.cyan.shade800,),
+                        child:  const Text('Send Request '),
+                        onPressed: () {
+
+                          isRequested.value=!isRequested.value;
+                          FirebaseFirestore.instance.collection('craftsman')
+                              .doc(id).collection("request")
+                              .add({
+                            'Email': myModel?.name,
+                            'userId': myModel?.uId,
+                            'status': 'pending',
+
+                          });
+                          AwesomeDialog(
+                              context: context,
+                              dialogType: DialogType.success,
+                              animType: AnimType.rightSlide,
+                              title: 'Request Sent !',
+                              desc: 'Wait until you are notified of accepting or rejecting your request',
+                              btnOkOnPress: () {
+                                Navigator.of(context).pushReplacementNamed("/homepage");
+                              },
+                              btnOkColor: Colors.cyan.shade800
+                          ).show();
+                          // Send request to Firebase
+                        },
+                      ),
+
+                    )
+                ),
+
+              ],
             ),
-            Expanded(
-                flex: 2,
-                child: ListTile(
-                  trailing:  Icon(Icons.edit,color: Colors.teal.shade800,),
-                )
-            ),
-          ],
+
+          ),
         ),
-      ),
+
+
+      ],
     );
   }
+
 }

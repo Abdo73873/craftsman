@@ -3,13 +3,12 @@
 //git commit -m "add chat"
 //git push -u origin main
 //git pull origin main
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../constant/app_color.dart';
-import '../request/userscreen.dart';
 
 
 class RequestsScreen3 extends StatefulWidget {
@@ -20,8 +19,6 @@ class RequestsScreen3 extends StatefulWidget {
 }
 class RequestsScreen3State extends State<RequestsScreen3>{
   var id = FirebaseAuth.instance.currentUser!.uid;
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +30,7 @@ class RequestsScreen3State extends State<RequestsScreen3>{
         title: const Text('Requests'),
       ),
       body: StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance.collection('Painters').doc(id).collection('request').snapshots(),
+        stream: FirebaseFirestore.instance.collection('craftsman').doc(id).collection('request').snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
@@ -54,13 +51,12 @@ class RequestsScreen3State extends State<RequestsScreen3>{
                           children: [
                             ElevatedButton(
                               onPressed: () {
-                                CollectionReference edit = FirebaseFirestore.instance.collection('Painters').doc(id).collection('request');
+                                CollectionReference edit = FirebaseFirestore.instance.collection('craftsman').doc(id).collection('request');
                                 DocumentReference docref = edit.doc(document.id);
-                                docref.delete().then((value) =>
-
-                                    FirebaseFirestore.instance.collection('Painters').doc(id).collection("AcceptedRequest").add({
-                                      'Email':  document['Email'],
-                                    }));
+                                docref.get().then((value) =>
+                                    FirebaseFirestore.instance.collection('craftsman').doc(id).collection("persons").doc(document['userId']).set({})
+                                        .then((value) =>  FirebaseFirestore.instance.collection('user').doc(document['userId']).collection("persons").doc(id).set({})
+                                        .then((value) => docref.delete())));
 
                               },
                               style:  ElevatedButton.styleFrom(
@@ -75,7 +71,7 @@ class RequestsScreen3State extends State<RequestsScreen3>{
                             const SizedBox(width: 20.0,),
                             OutlinedButton(
                               onPressed: () {
-                                CollectionReference edit = FirebaseFirestore.instance.collection('Painters').doc(id).collection('request');
+                                CollectionReference edit = FirebaseFirestore.instance.collection('craftsman').doc(id).collection('request');
                                 DocumentReference docref = edit.doc(document.id);
                                 docref.update({'status': 'rejected',}).then((value) =>
                                     edit.doc(document.id).delete()

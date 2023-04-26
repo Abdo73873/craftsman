@@ -24,8 +24,8 @@ class ForgetPassState extends State<ForgetPass>{
    Widget build(BuildContext context) {
      return Scaffold(
        appBar: AppBar(
-         title: Text("Forget Password",style: TextStyle(color: Colors.grey.shade600,fontSize: 25)),
-         leading: IconButton(icon: Icon (Icons.arrow_back,color: Colors.red.shade700,size: 30,),onPressed: (){
+         title: Text("Forget Password ",style: TextStyle(color: Colors.grey.shade600,fontSize: 25)),
+         leading: IconButton(icon: Icon (Icons.arrow_back,color: Colors.cyan.shade800,size: 30,),onPressed: (){
            Get.offAllNamed("/login");
          }) ,
          backgroundColor: Colors.grey.shade50,
@@ -36,9 +36,9 @@ class ForgetPassState extends State<ForgetPass>{
         child: Form(
           key: formState,
           child: ListView(
-              padding: const EdgeInsets.only(top: 50),
+              padding: const EdgeInsets.only(top: 10),
               children: [
-                Image.asset(image.image7,height: 100,),
+                Image.asset(image.image7,height: 150,),
                 const SizedBox(height: 20),
                 const Text(" Check Email !",style: TextStyle(color: Colors.black,fontSize: 27,fontWeight: FontWeight.bold),textAlign: TextAlign.center,),
                 const SizedBox(height: 13),
@@ -52,14 +52,14 @@ class ForgetPassState extends State<ForgetPass>{
                   filled: true,
                   labelText: 'Email',
                   enabled: true,
-                  prefixIcon: Icon(Icons.email,color: Colors.red.shade500,),
+                  prefixIcon: Icon(Icons.email,color: Colors.cyan.shade800,),
                   enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30),
-                      borderSide: BorderSide(color: Colors.red.shade200, width: 2,)),
+                      borderSide: BorderSide(color: Colors.cyan.shade500, width: 2,)),
 
                   focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30),
-                      borderSide: BorderSide(color: Colors.red.shade500, width: 2,))),
+                      borderSide: BorderSide(color: Colors.cyan.shade800, width: 2,))),
 
                 ),
                 const SizedBox(height: 50,),
@@ -69,7 +69,7 @@ class ForgetPassState extends State<ForgetPass>{
                       BorderRadius.all(Radius.circular(10.0))),
                   elevation: 10.0,height: 40,
                   onPressed: passwordReset,
-                  color: Colors.red.shade500,
+                  color: Colors.cyan.shade800,
                   child: const Text(
                     "Submit", style: TextStyle(color:Colors.white,fontSize: 25,fontWeight: FontWeight.bold),
                   ),

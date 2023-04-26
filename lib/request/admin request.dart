@@ -3,7 +3,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:craftsman/constant/app_color.dart';
 import 'package:craftsman/home/craftHome.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 
@@ -33,6 +32,7 @@ class RequestsScreen2 extends StatelessWidget {
                 trailing: ElevatedButton(
                   child: Text('Accept'),
                   onPressed: () {
+
                     FirebaseFirestore.instance.collection('requests').doc(document.id).update({
                       'status': 'responded',
                     }).then((value) => Navigator.push(

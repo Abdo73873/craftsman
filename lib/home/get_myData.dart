@@ -1,9 +1,7 @@
 
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:craftsman/constant/app_color.dart';
 import 'package:craftsman/main.dart';
-
 import '../constant/constant.dart';
 import '../models/person.dart';
 
