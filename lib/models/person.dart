@@ -7,6 +7,7 @@ class Person {
   late int age;
   late String role;
    String? image;
+   String? deviceToken;
 
   Person({
     required this.name,
@@ -17,6 +18,7 @@ class Person {
     required this.age,
     required this.role,
     this.image,
+    this.deviceToken,
   });
 
   Person.fromJson(Map<String, dynamic> json) {
@@ -28,6 +30,7 @@ class Person {
     age = json["age"];
     role = json["role"];
     image = json["image"];
+    deviceToken = json["deviceToken"];
   }
 
   Map<String, dynamic> toMaP() {
@@ -40,6 +43,7 @@ class Person {
       "age": age,
       "role": role,
       "image": image,
+      "deviceToken": deviceToken,
     };
   }
 }

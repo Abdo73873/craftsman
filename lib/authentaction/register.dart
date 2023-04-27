@@ -427,7 +427,6 @@ class RegisterState extends State<Register> {
   }
 
   Future postDetailsToFirestore(String email, String role) async {
-    print('ssssssssss');
      myModel = Person(
         name:  name.text,
         email: Email.text,
@@ -436,6 +435,8 @@ class RegisterState extends State<Register> {
         address: address.text,
         age: int.parse(age.text),
        role: role,
+       deviceToken: deviceToken,
+
     );
     if (role == 'user') {
       CollectionReference ref = FirebaseFirestore.instance.collection('user');
@@ -446,13 +447,7 @@ class RegisterState extends State<Register> {
 
     else if ((role == 'craftsman')) {
       Get.offAllNamed("/career");
-     /* shared!.setString('email', Email.text);
-      shared!.setString('address', address.text);
-      shared!.setString('age', age.text);
-      shared!.setString('UserName', name.text);
-      shared!.setString('phone', phone.text);
-      shared!.setString('role', role);
-      shared!.setString('id', FirebaseAuth.instance.currentUser!.uid);*/
+
     }
   }
 }

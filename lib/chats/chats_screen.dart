@@ -6,7 +6,6 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:craftsman/chats/chat_item.dart';
 import 'package:craftsman/constant/app_color.dart';
 import 'package:craftsman/constant/app_images.dart';
-import 'package:craftsman/constant/app_images.dart';
 import 'package:craftsman/constant/constant.dart';
 import 'package:craftsman/models/person.dart';
 import 'package:flutter/material.dart';

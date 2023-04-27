@@ -1,117 +1,163 @@
+
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:craftsman/main.dart';
+import 'package:craftsman/constant/constant.dart';
 import 'package:craftsman/profile/viewProfile.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:craftsman/standared/images.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+
 class Carpenter extends StatefulWidget {
 
-  Carpenter({Key? key}) : super(key: key);
+  const Carpenter({Key? key}) : super(key: key);
 
   @override
   CarpenterState createState() => CarpenterState();
 }
 class CarpenterState extends State<Carpenter>{
 
-  CollectionReference carpenters = FirebaseFirestore.instance.collection("Carpenters");
+  var carpenters = FirebaseFirestore.instance.collection("craftsman").
+  where("role",isEqualTo: "Carpenter");
+  String? name ='';
 
 
-  getUser(){
-    var user = FirebaseAuth.instance.currentUser;
-  }
+
   @override
   void initState(){
-    getUser();
     super.initState();
   }
 
 
   @override
   Widget build (BuildContext context)
+
   {
+
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xFF89dad0),
-        title: Text("Carpenters",style: TextStyle(color: Colors.red.shade800),),
+        elevation: 0,
+        backgroundColor:Colors.cyan.shade800,
         centerTitle: true,
-        leading: IconButton(icon:Icon (Icons.arrow_back,color: Colors.red.shade800,),onPressed: (){
+        leading: IconButton(icon:const Icon (Icons.arrow_back),onPressed: (){
           Get.offAllNamed("/homepage");
         }) ,
       ),
 
-      body : Container(
-          child: FutureBuilder(
-              future: carpenters.get(),
-              builder: (context,AsyncSnapshot snapshot) {
-                if (snapshot.hasData) {
-                  return ListView.builder(
-                      itemCount: snapshot.data.docs.length,
-                      itemBuilder: (context, i) {
-                        return CarpenterList(
-                            carpenter : snapshot.data.docs[i],
-                            id: snapshot.data.docs[i].id);
-                      });
-                }
-                return Center(child: CircularProgressIndicator(),);
-              })
+      body : Column(
+        children: [
+          Image.asset(image.image17,),
+          Expanded(
+            child: FutureBuilder(
+                future: carpenters.get(),
+                builder: (context,AsyncSnapshot snapshot) {
+                  if (snapshot.hasData) {
+                    return ListView.builder(
+                        itemCount: snapshot.data.docs.length,
+                        itemBuilder: (context, i) {
+                          return CarpentersList(
+                              carpenter : snapshot.data.docs[i],
+                              id: snapshot.data.docs[i].id);
+                        });
+                  }
+                  return const Center(child: CircularProgressIndicator(),);
+                }),
+          ),
+        ],
       ),
     );
 
   }
 }
-class CarpenterList extends StatelessWidget{
+class CarpentersList extends StatelessWidget{
   final carpenter;
   final id;
-  CarpenterList({super.key,
+  CarpentersList({super.key,
     this.carpenter, this.id
   });
 
   GlobalKey<FormState> formstate =  GlobalKey <FormState>();
-  User? user = FirebaseAuth.instance.currentUser;
+
+  final ValueNotifier<bool> isRequested= ValueNotifier<bool> (false);
 
   @override
   Widget build (BuildContext context){
-    return InkWell(
-      onTap: (){
-        Navigator.of(context).push(MaterialPageRoute(builder: (context){
-          return view(crafts: carpenter,);
-        }));
-      },
-      child: Card(
-        child: Row(
-          children: [
-            Expanded(
-              flex: 2,
-              child: ListTile(
-                title: Text("\n${carpenter['UserName']}",),
-                subtitle: Text("\n${carpenter['Career']}"),
-                textColor:Colors.orange.shade900 ,
-              ),
-            ),
-            Expanded(
-              flex: 2,
-              child: ListTile(
-                subtitle: Text("\n${carpenter['phone']}",),
-                textColor:Colors.orange.shade900 ,
+    return Column(
+      children: [
+              InkWell(
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                    return view(crafts: carpenter,);
+                  }));
+                },
+                child: Card(
+                  child: Row(
+                    children: [
 
-              ),
-            ),
-            Expanded(
-              flex: 2,
-              child: ListTile(
-                  trailing:  IconButton(
-                    color: Colors.teal.shade800, onPressed: () {
+                      Expanded(
+                        flex: 3,
+                        child: ListTile(
+                          title: Text("\n${carpenter['name']}",),
+                          subtitle: Text("\n${carpenter['role']}"),
+                          textColor: Colors.black,
+                        ),
+                      ),
+                      Expanded(
+                        flex: 3,
+                        child: ListTile(
+                          subtitle: Text("\n${carpenter['phone']}",),
+                          textColor: Colors.black,
 
-                  }, icon: Icon(Icons.add),),
-                  )
+                        ),
+                      ),
+
+                      Expanded(
+                          flex: 4,
+                          child: ListTile(
+
+                            trailing:
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.cyan.shade800,),
+                              child:  const Text('Send Request '),
+                              onPressed: () {
+
+                                isRequested.value=!isRequested.value;
+                                FirebaseFirestore.instance.collection('craftsman')
+                                    .doc(id).collection("request")
+                                    .add({
+                                  'Email': myModel?.name,
+                                  'userId': myModel?.uId,
+                                  'status': 'pending',
+
+                                });
+                                AwesomeDialog(
+                                    context: context,
+                                    dialogType: DialogType.success,
+                                    animType: AnimType.rightSlide,
+                                    title: 'Request Sent !',
+                                    desc: 'Wait until you are notified of accepting or rejecting your request',
+                                    btnOkOnPress: () {
+                                      Navigator.of(context).pushReplacementNamed("/homepage");
+                                    },
+                                    btnOkColor: Colors.cyan.shade800
+                                ).show();
+                                // Send request to Firebase
+                              },
+                            ),
+
+                          )
+                      ),
+
+                    ],
+                  ),
+
+                ),
               ),
-          ],
-        ),
-      ),
+
+
+      ],
     );
-
   }
 
 }

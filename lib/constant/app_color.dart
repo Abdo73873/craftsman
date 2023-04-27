@@ -12,7 +12,7 @@ class AppColors{
         return Colors.red;
       }
     }else{
-      return Colors.cyan;
+      return Colors.cyan.shade800;
     }
   }
 }

@@ -1,14 +1,13 @@
 
 
-
 import 'dart:io';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:craftsman/constant/app_color.dart';
 import 'package:craftsman/constant/app_images.dart';
 import 'package:craftsman/constant/constant.dart';
 import 'package:craftsman/models/person.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -22,8 +21,220 @@ class Profile  extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+
   File? profileImage;
   final picker = ImagePicker();
+
+  final FirebaseAuth auth = FirebaseAuth.instance;
+  final FirebaseFirestore firestore = FirebaseFirestore.instance;
+  String errormessage = '';
+
+  final phoneController = TextEditingController();
+  final addressController = TextEditingController();
+  final userNameController = TextEditingController();
+  final phonefocus = FocusNode();
+  final userNamefocus = FocusNode();
+  final addressfocus = FocusNode();
+
+  Future<void> showPhoneDialogAlert (BuildContext context , String phone){
+   phoneController.text = phone;
+    return showDialog(context: context, builder: (context){
+      return AlertDialog(
+        title: Text('Update phone',style: TextStyle(color: Colors.cyan.shade900),),
+          content:  SingleChildScrollView(
+          child: Column(
+            children: [
+              TextFormField(
+                decoration: InputDecoration(
+                    labelStyle:const TextStyle(fontSize: 17,color: Colors.grey,fontWeight: FontWeight.w500) ,
+                    filled: true,
+                    labelText: 'Enter your new phone',
+                    enabled: true,
+                    prefixIcon: Icon(Icons.phone,color: Colors.cyan.shade800,),
+
+                    enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5),
+                        borderSide: BorderSide(color: Colors.cyan.shade700, width: 2,)),
+
+                    focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(color: Colors.cyan.shade500, width: 2,))),
+                controller: phoneController,
+                focusNode: phonefocus ,
+                onFieldSubmitted: (value){
+                },
+                keyboardType: TextInputType.phone,
+                obscureText: false,
+                onChanged: (value){},)],),),
+          actions: [
+          TextButton(onPressed: () async{
+            setState(() {
+              myModel!.phone = phoneController.text;
+            });
+            if(myModel!.role=='user'){
+              FirebaseFirestore.instance.collection('user').doc(myId).update(
+                  {
+                    'phone' : myModel!.phone
+                  });
+            }
+            else{
+              FirebaseFirestore.instance.collection('craftsman').doc(FirebaseAuth.instance.currentUser!.uid).update(
+                  {
+                    'phone' : myModel!.phone
+                  });
+            }
+          Navigator.pop(context);
+        }, child: Text('Ok',style: TextStyle(color: Colors.cyan.shade900),)),
+          TextButton(onPressed: (){
+
+        Navigator.pop(context);
+      }, child: Text('Cancel',style: TextStyle(color: Colors.cyan.shade900),))]
+
+      );
+    });
+  }
+  Future<void> showuserNameDialogAlert (BuildContext context , String name){
+    userNameController.text = name;
+    return showDialog(context: context, builder: (context){
+      return AlertDialog(
+          title: Text('Update username',style: TextStyle(color: Colors.cyan.shade900),),
+          content:  SingleChildScrollView(
+            child: Column(
+              children: [
+                TextFormField(
+                  decoration: InputDecoration(
+                      labelStyle:const TextStyle(fontSize: 17,color: Colors.grey,fontWeight: FontWeight.w500) ,
+                      filled: true,
+                      labelText: 'Enter your new UserName',
+                      enabled: true,
+                      prefixIcon: Icon(Icons.person,color: Colors.cyan.shade800,),
+
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5),
+                          borderSide: BorderSide(color: Colors.cyan.shade700, width: 2,)),
+
+                      focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide(color: Colors.cyan.shade500, width: 2,))),
+
+                  controller: userNameController,
+                  focusNode: userNamefocus ,
+                  onFieldSubmitted: (value){},
+                  keyboardType: TextInputType.name,
+                  obscureText: false,
+                  onChanged: (value){},)],),),
+          actions: [
+            TextButton(onPressed: () async{
+              setState(() {
+                myModel!.name = userNameController.text;
+              });
+              if(myModel!.role=='user'){
+                FirebaseFirestore.instance.collection('user').doc(myId).update(
+                    {
+                      'name' : myModel!.name
+                    });
+              }
+              else{
+                FirebaseFirestore.instance.collection('craftsman').doc(FirebaseAuth.instance.currentUser!.uid).update(
+                    {
+                      'name' : myModel!.name
+                    });
+              }
+              Navigator.pop(context);
+            }, child: Text('Ok',style: TextStyle(color: Colors.cyan.shade900),)),
+            TextButton(onPressed: (){
+
+              Navigator.pop(context);
+            }, child: Text('Cancel',style: TextStyle(color: Colors.cyan.shade900),))]
+
+      );
+    });
+  }
+  Future<void> showaddressDialogAlert (BuildContext context , String address){
+    addressController.text = address;
+    return showDialog(context: context, builder: (context){
+      return AlertDialog(
+          title: Text('Update Address',style: TextStyle(color: Colors.cyan.shade900),),
+          content:  SingleChildScrollView(
+            child: Column(
+              children: [
+                TextFormField(
+                  decoration: InputDecoration(
+                      labelStyle:const TextStyle(fontSize: 17,color: Colors.grey,fontWeight: FontWeight.w500) ,
+                      filled: true,
+                      labelText: 'Enter your new Address',
+                      enabled: true,
+                      prefixIcon: Icon(Icons.home,color: Colors.cyan.shade800,),
+
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5),
+                          borderSide: BorderSide(color: Colors.cyan.shade700, width: 2,)),
+
+                      focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide(color: Colors.cyan.shade500, width: 2,))),
+
+                  controller:addressController,
+                  focusNode: addressfocus ,
+                  onFieldSubmitted: (value){},
+                  keyboardType: TextInputType.text,
+                  obscureText: false,
+                  onChanged: (value){},)],),),
+          actions: [
+            TextButton(onPressed: () async{
+              setState(() {
+                myModel!.address = addressController.text;
+              });
+              if(myModel!.role=='user'){
+                FirebaseFirestore.instance.collection('user').doc(myId).update(
+                    {
+                      'address' : myModel!.address
+                    });
+              }
+              else{
+                FirebaseFirestore.instance.collection('craftsman').doc(FirebaseAuth.instance.currentUser!.uid).update(
+                    {
+                      'address' : myModel!.address
+                    });
+              }
+              Navigator.pop(context);
+            }, child: Text('Ok',style: TextStyle(color: Colors.cyan.shade900),)),
+            TextButton(onPressed: (){
+
+              Navigator.pop(context);
+            }, child: Text('Cancel',style: TextStyle(color: Colors.cyan.shade900),))]
+
+      );
+    });
+  }
+
+  Future<void> deleteAccount()async{
+    try{
+      User user = auth.currentUser!;
+
+      if(myModel!.role=='user') {
+        await user.delete();
+      await firestore.collection('user').doc(user.uid).delete();
+        await firestore.collection('user').doc(user.uid).collection('request').doc(user.uid).delete();
+      }
+      else{
+        await user.delete();
+        await firestore.collection('craftsman').doc(user.uid).delete();
+        await firestore.collection('craftsman').doc(user.uid).collection('request').doc(user.uid).delete();
+      }
+    }
+    on FirebaseAuthException catch(e){
+      setState(() {
+        errormessage = e.message!;
+      });
+    }
+    catch(e){
+      setState(() {
+        errormessage = 'An error occurred while deleting the account.';
+      });
+    }
+  }
+
 
   Future getImage(isGallery) async {
     ImageSource source;
@@ -170,36 +381,24 @@ class _ProfileState extends State<Profile> {
                               ],
                             ),
                           ),
-                          /* GestureDetector(
-                          onTap: (){},
-                          child: CircleAvatar(
-                            backgroundColor: Colors.blue,
-                            minRadius: 60.0,
-                            child: CircleAvatar(
-                              radius: 50.0,
-                              backgroundImage: imageFile==null?
-                              AssetImage(image):
-                              Image.file(imageFile!).image
-                            ),
-                          ),
-                        ),*/
 
                           const SizedBox(height: 35,),
                           ListTile(
                             onTap: () {
-                              Get.off("");
+                              showuserNameDialogAlert(context ,myModel!.name);
                             },
                             leading: Icon(Icons.person, color: AppColors.primary,
                                 size: 20),
                             title: Text("User Name : ${myModel!.name}",
                                 style: const TextStyle(fontSize: 19)),
-
+                            trailing: const Icon(
+                                Icons.arrow_forward_ios_outlined),
                           ),
 
                           const SizedBox(height: 35),
                           ListTile(
                             onTap: () {
-                              Get.off("");
+
                             },
                             leading: Icon(Icons.email, color: AppColors.primary, size: 20),
                             title: Text("Email : " + "\n${myModel!.email}",
@@ -210,7 +409,7 @@ class _ProfileState extends State<Profile> {
                           const SizedBox(height: 35),
                           ListTile(
                             onTap: () {
-                              Get.off("");
+                              showPhoneDialogAlert(context, myModel!.phone);
                             },
                             leading: Icon(Icons.phone, color: AppColors.primary, size: 20),
                             title: Text("Phone : ${myModel!.phone}",
@@ -219,21 +418,10 @@ class _ProfileState extends State<Profile> {
                                 Icons.arrow_forward_ios_outlined),
                           ),
                           const SizedBox(height: 35),
+
                           ListTile(
                             onTap: () {
-                              Get.off("");
-                            },
-                            leading: Icon(
-                                Icons.text_snippet_sharp, color: AppColors.primary, size: 20),
-                            title: Text("Age: " + "${myModel!.age}",
-                                style: const TextStyle(fontSize: 19)),
-                            trailing: const Icon(
-                                Icons.arrow_forward_ios_outlined),
-                          ),
-                          const SizedBox(height: 35),
-                          ListTile(
-                            onTap: () {
-                              Get.off("");
+                              showaddressDialogAlert(context ,myModel!.address);
                             },
                             leading: Icon(Icons.home_rounded, color: AppColors.primary, size: 20),
                             title: Text("Address: ${myModel!.address}",
@@ -242,6 +430,7 @@ class _ProfileState extends State<Profile> {
                                 Icons.arrow_forward_ios_outlined),
                           ),
                           const SizedBox(height: 35),
+
                           ListTile(
                             onTap: () {
                               Get.off("");
@@ -249,8 +438,37 @@ class _ProfileState extends State<Profile> {
                             leading: Icon(Icons.person, color: AppColors.primary, size: 20),
                             title: Text("Career : ${myModel!.role}",
                                 style: const TextStyle(fontSize: 19)),
+
+                          ),
+                          const SizedBox(height: 35),
+
+                          ListTile(
+                            onTap: () {
+                              showDialog(context: context, builder: (context){
+                                return AlertDialog(
+                                    content:  SingleChildScrollView(
+                                    child: Column(
+                                    children: const [
+                                      Text("Do you Want to delete your account?" ),
+                                    ])),
+                                  actions: [
+                                    TextButton(onPressed: () async{
+                                      deleteAccount();
+                                      Get.offAllNamed("/login");
+                                    }, child: Text('Ok',style: TextStyle(color: Colors.cyan.shade900),)),
+                                    TextButton(onPressed: (){
+                                      Navigator.pop(context);
+                                    }, child: Text('Cancel',style: TextStyle(color: Colors.cyan.shade900),))
+                                  ],
+                                );
+                              });
+                            },
                             trailing: const Icon(
                                 Icons.arrow_forward_ios_outlined),
+                            leading: Icon(Icons.delete, color : AppColors.primary, size: 20),
+                            title: const Text("Delete Account ",
+                                style: TextStyle(fontSize: 19)),
+
                           ),
                         ])
                 )

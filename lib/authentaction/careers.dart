@@ -1,6 +1,6 @@
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:craftsman/constant/constant.dart';
-import 'package:craftsman/main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,15 +15,20 @@ class CareerState extends State<Career> {
 
   bool showProgress = false;
 
+
+
+
   final auth = FirebaseAuth.instance;
   var options = [
     'Carpenter',
     'Plumper',
-    'Electrical',
+    'Electrician',
     'Painter',
     'Maintenance technician',
   ];
   String role = 'Carpenter';
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +63,7 @@ class CareerState extends State<Career> {
                   color: Colors.white,),),
               const SizedBox(height: 20.0,),
               DropdownButton<String>(
-                dropdownColor: Colors.redAccent.shade700,
+                dropdownColor: Colors.cyan.shade600,
                 isDense: true,
                 isExpanded: false,
                 iconEnabledColor: Colors.white,

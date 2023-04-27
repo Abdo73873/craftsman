@@ -110,14 +110,14 @@ class LoginState extends State<Login> {
                   password = value;
                   },
                 keyboardType: TextInputType.emailAddress,),
-              const SizedBox(height: 17,width: 50,),
+              const SizedBox(height: 10,width: 50,),
               InkWell(
                   onTap: (){
                     Get.offAllNamed("/forget");
                     },
                   child:
                   const Text("   Forget Password ? ",textAlign: TextAlign.right,style: TextStyle(fontSize: 17,color: Colors.blueGrey),)),
-              const SizedBox(height: 100,),
+              const SizedBox(height: 80,),
               Container(
                 margin: const EdgeInsets.only(left: 110,right: 110,top: 30),
                 child: ElevatedButton (
@@ -125,13 +125,14 @@ class LoginState extends State<Login> {
                   onPressed: () async {
                     var user = await signIn();
                     if (user!= null) {
+
                       route();
                     }
                     setState(() {
                       visible = true;
                     });},
                   child: const Text("Login" , style: TextStyle(fontSize: 27,color: Colors.white),),),),
-              const SizedBox(height: 20,),
+              const SizedBox(height: 10,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -169,6 +170,10 @@ class LoginState extends State<Login> {
               builder: (context) =>   const UserHome(),
             ),
           );
+          FirebaseFirestore.instance
+              .collection("user")
+              .doc(myId)
+          .update({"deviceToken":deviceToken});
       }
       else {
         print('Document does not exist on the database');
@@ -184,12 +189,19 @@ class LoginState extends State<Login> {
         myModel =Person.fromJson(craftsman.docs[0].data());
           AppColors.primary=AppColors.getPrimaryColor();
           AppImages.profile=AppImages.getProfile();
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) =>  const CraftHome(),
-            ),
-          );
+          FirebaseFirestore.instance
+              .collection("craftsman")
+              .doc(myId)
+              .update({"deviceToken":deviceToken}).then((value){
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) =>  const CraftHome(),
+              ),
+            );
+
+          });
+
       } else {
         print('Document does not exist on the database');
       }
