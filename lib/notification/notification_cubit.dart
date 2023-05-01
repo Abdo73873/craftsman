@@ -14,16 +14,17 @@ part 'notification_state.dart';
 class NotificationCubit extends Cubit<NotificationState> {
   NotificationCubit() : super(NotificationInitial());
 
-  static NotificationCubit get(context)=>BlocProvider.of(context);
-  List<NotificationModel> notify=[];
-
-
+  static NotificationCubit get(context) => BlocProvider.of(context);
+  List<NotificationModel> notify = [];
 
   Future<void> streamNotification() async {
-    await getMyData();
-    String to="craftsman";
-    if(myModel!.role=="user"){
-      to="user";
+    // await Future.delayed(const Duration(seconds: 2));
+    if (myModel == null) {
+          await getMyData();
+    }
+    String to = "craftsman";
+    if (myModel!.role == "user") {
+      to = "user";
     }
     FirebaseFirestore.instance
         .collection(to)
@@ -31,11 +32,11 @@ class NotificationCubit extends Cubit<NotificationState> {
         .collection('notification')
         .snapshots()
         .listen((event) {
-      notify=[];
+      notify = [];
       for (var element in event.docs) {
         notify.add(NotificationModel.fromJson(element.data()));
       }
-      if (notify.isNotEmpty)  {
+      if (notify.isNotEmpty) {
         Fluttertoast.showToast(
           msg: notify.last.message,
           toastLength: Toast.LENGTH_SHORT,
@@ -52,21 +53,19 @@ class NotificationCubit extends Cubit<NotificationState> {
   }
 
   void clearNotification() {
-    String to="craftsman";
-    if(myModel!.role=="user"){
-      to="user";
+    String to = "craftsman";
+    if (myModel!.role == "user") {
+      to = "user";
     }
     FirebaseFirestore.instance
         .collection(to)
         .doc(myId)
         .collection('notification')
         .get()
-        .then((value){
+        .then((value) {
       for (var element in value.docs) {
         element.reference.delete();
       }
     });
-
   }
-
 }

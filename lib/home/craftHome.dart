@@ -19,7 +19,6 @@ class CraftHome extends StatefulWidget {
 class HomeState extends State<CraftHome> {
   @override
   void initState() {
-    getMyData();
     super.initState();
   }
 

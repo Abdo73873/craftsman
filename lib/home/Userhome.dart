@@ -22,9 +22,8 @@ class HomeState extends State<UserHome> {
   var fmess = FirebaseMessaging.instance;
 
   @override
-  void initState() {
-
-    getMyData();
+void initState()  {
+     getMyData();
     super.initState();
   }
 
@@ -39,7 +38,6 @@ class HomeState extends State<UserHome> {
               return Stack(
                 alignment: AlignmentDirectional.topEnd,
                 children: [
-
               FloatingActionButton(
                      backgroundColor: Colors.white,
                      onPressed: () {

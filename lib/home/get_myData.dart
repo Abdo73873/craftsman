@@ -8,12 +8,19 @@ import '../models/person.dart';
 Future<void> getMyData() async {
   if(myModel==null) {
     String role=shared!.getString('role')!;
-   await FirebaseFirestore.instance.collection(role)
+    String to="craftsman";
+    if(role=="user"){
+      to="user";
+    }
+   await FirebaseFirestore.instance.collection(to)
     .doc(myId)
       .get()
       .then((my) {
       myModel =Person.fromJson(my.data()!);
   });
+    FirebaseFirestore.instance.collection(to)
+    .doc(myId)
+    .update({"deviceToken":deviceToken});
   }
 
 }
